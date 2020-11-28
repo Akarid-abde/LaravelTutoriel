@@ -3,7 +3,7 @@
 
 @section('content')
 
-<!-- Validateur des erreur -->
+<!-- Validateur des erreur generale
 @if(count($errors))
 
 <div class="alert alert-danger" role="alert">
@@ -13,7 +13,8 @@
      @endforeach
      </ul>
 </div>
-@endif
+@endif   
+-->
 
 <div class="container">
 	<div class="row">
@@ -21,15 +22,29 @@
 			<form action="{{ url('cvs') }}" method="post">
 
                 {{ csrf_field() }}
-
-				<div class="from-group">
+				<div class="from-group @if($errors->get('titre')) has-error @endif">
 					<label for="">Titre</label>
 					<input type="text" name="titre" class="form-control" value="{{ old('titre') }}">
+			    @if($errors->get('titre'))
+                    <ul>
+                    @foreach($errors->get('titre') as $message)
+                      <li>{{ $message }}</li>
+                    @endforeach
+                     </ul>
+                @endif
 				</div>
 
-				<div class="from-group">
+				<div class="from-group has-error">
 					<label for="">Presentation</label>
-					<textarea type="text" name="presentation" class="form-control">{{ old('presentation') }}</textarea>
+					<textarea type="text" name="presentation" class="form-control">{{ old('presentation') }}
+					</textarea>
+			    @if($errors->get('presentation'))
+                    <ul>
+                    @foreach($errors->get('presentation') as $message)
+                      <li>{{ $message }}</li>
+                    @endforeach
+                     </ul>
+                @endif
 				</div>
                 <hr>
 				<div class="from-group">
