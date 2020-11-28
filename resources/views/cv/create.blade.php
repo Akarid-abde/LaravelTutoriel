@@ -22,7 +22,7 @@
 			<form action="{{ url('cvs') }}" method="post">
 
                 {{ csrf_field() }}
-				<div class="from-group @if($errors->get('titre')) has-error @endif">
+				<div class="form-group @if($errors->get('titre')) has-error @endif">
 					<label for="">Titre</label>
 					<input type="text" name="titre" class="form-control" value="{{ old('titre') }}">
 			    @if($errors->get('titre'))
@@ -34,7 +34,7 @@
                 @endif
 				</div>
 
-				<div class="from-group has-error">
+				<div class="form-group has-error">
 					<label for="">Presentation</label>
 					<textarea type="text" name="presentation" class="form-control">{{ old('presentation') }}
 					</textarea>
