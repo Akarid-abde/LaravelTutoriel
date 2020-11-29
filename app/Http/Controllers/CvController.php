@@ -29,6 +29,7 @@ class CvController  extends Controller
           $cv->presentation = $request->input('presentation');
 
           $cv->save();
+          session()->flash('success','le cv est bien enregistrer !!');
 
           return redirect('cvs');
     }
@@ -48,6 +49,7 @@ class CvController  extends Controller
           $cv->titre = $request->input('titre');
           $cv->presentation = $request->input('presentation');
     	  $cv->save();
+        session()->flash('update','la modification est bien fait ');
     	  return redirect('cvs');
     }
 
@@ -57,6 +59,7 @@ class CvController  extends Controller
     	//return $request::all();
     	$cv = Cv::find($id);
     	$cv->delete();
+      session()->flash('delete','la supprission est bien fait ');
     	return redirect('cvs');
     }
 }
