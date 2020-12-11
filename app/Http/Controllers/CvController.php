@@ -5,17 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cv;
 use App\Http\Requests\cvRequest;
+use Auth;
 
 class CvController  extends Controller
 {
 
   public function __construct(){
-    return $this->middleware('auth');
+     $this->middleware('auth');
   }
         //lister les cvs
     public function index()
     {
-    	$list = Cv::all();
+      $list = Auth::user()->cvs;
+  //$list = Cv::all(); afficher tous les cvs
+  //$list = Cv::where('user_id',Auth::user()->id)->get(); replace par Relationships  
     	return view('cv.index',['cvs' => $list]);
     }
     
@@ -31,6 +34,7 @@ class CvController  extends Controller
           $cv = new Cv();
           $cv->titre = $request->input('titre');
           $cv->presentation = $request->input('presentation');
+          $cv->user_id = Auth::user()->id;
 
           $cv->save();
           session()->flash('success','le cv est bien enregistrer !!');

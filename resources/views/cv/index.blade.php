@@ -2,10 +2,10 @@
 
 
 @section('content')
-
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
+			<h1> List des Cvs </h1>
 
             @if(session()->has('success') || session()->has('delete') || session()->has('update'))
             <div class="alert alert-success">
@@ -14,7 +14,7 @@
                      {{ session()->get('update')}}
             </div>
             @endif
-			<h1>List des Cvs</h1>
+			
              <div style="margin-left: 80%;">
              	<a href="{{ url('cvs/create') }}" class="btn btn-warning"> Nouveau CV </a>
              </div>
@@ -31,7 +31,7 @@
                 <body>
                 	@foreach($cvs as $cv)
                 <tr>
-					<td>{{ $cv->titre }}</td>
+					<td>{{ $cv->titre }} </br> {{ $cv->user->name }} </td>
 					<td>{{ $cv->presentation }}</td>
 					<td>{{ $cv->created_at }}</td>
 					<td>
